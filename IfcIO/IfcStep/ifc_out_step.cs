@@ -30,7 +30,9 @@ string s;//="";
                 }
                 else {
                     if (((SELECT)o).SelectValue() is ENTITY) s = ((SELECT)o).SelectValue().ToString();
-                    else s = "IFC" + ((SELECT)o).SelectType().Name.ToUpper() + "(" + ((SELECT)o).SelectValue().ToString() + ")";
+                    else {if (((SELECT)o).SelectValue()!=null) s = "IFC" + ((SELECT)o).SelectType().Name.ToUpper() + "(" + ((SELECT)o).SelectValue().ToString() + ")";
+                          else {s = "$"; Log.Add("StepAttributeOut: SELECT not found: " +o.ToString(), Log.Level.Error);}
+                         }
                 }
             }
             else if (o is ENTITY) s = ((ENTITY)o).IfcId();

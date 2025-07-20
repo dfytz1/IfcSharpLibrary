@@ -1,4 +1,5 @@
 // ifc_base_geometry.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
+using NetSystem=System;
 
 namespace ifc{//==============================
 
@@ -56,8 +57,8 @@ public               Axis2Placement3D Clone(CartesianPoint p,string EndOfLineCom
 
 
 /*
-public partial class CompoundPlaneAngleMeasure :List3to4<int>{
-public CompoundPlaneAngleMeasure (params int[] items):base() {foreach (int e in items)  this.Add((int)e);}  // INTEGER
+public partial class CompoundPlaneAngleMeasure :TYPE<List3to4<int>>{
+public CompoundPlaneAngleMeasure (params int[] items):base() {NetSystem.Console.WriteLine("CompoundPlaneAngleMeasure (params int[] items)"); this.TypeValue=new List3to4<int>(); foreach (int e in items)  this.TypeValue.Add(e);NetSystem.Console.WriteLine(this.ToString());}  // INTEGER
 }
 */
 

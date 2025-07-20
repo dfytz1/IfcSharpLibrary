@@ -106,7 +106,7 @@ namespace ifc {
             if (values[0] == "" || values[0] == "$") try { instance = Activator.CreateInstance(listType); } catch(Exception e) { Log.Add($"ERROR on Parse2LIST.3:{CurrentLine}\n{e}", Log.Level.Exception);}
             else {try {
                        for (int i=0;i<values.Length;i++) values[i]=values[i].Trim(' ').Replace("'",""); // 2024-03-30 (bb) remove string-characters, 
-                       for (int i=0;i<values.Length;i++) if (!values[i].StartsWith("IFC")) values[i]=values[i].Replace("(","").Replace(")",""); //2024-05-10 (bb) remove ) and (, 2024-05-20 (bb) only if not SELECT
+                       for (int i=0;i<values.Length;i++) if (!values[i].StartsWith("IFC")) values[i]=values[i].Replace("(","").Replace(")",""); //2024-05-10 (bb) remove ) and (, 2024-05-20 (bb) only if not SELECT, because SELECT will be evaluated in GetListCtorArgs
                        instance = Activator.CreateInstance(listType, GetListCtorArgs(valueType, values));
                       }
                   catch (Exception e) {Log.Add($"ERROR on Parse2LIST.2:{CurrentLine}\nlistType={listType}\nvalueType={valueType}\n{e}", Log.Level.Exception);}

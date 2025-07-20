@@ -45,10 +45,10 @@ public void SqlOut1(long GlobalId,int OrdinalPosition,int ListDim1Position, obje
                                               }
                                       } 
                                   }
+  else if (o is NetSystem.Int32)   ifcSqlInstance.cp.EntityAttributeListElementOfInteger.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfInteger_Row(GlobalId,OrdinalPosition,ListDim1Position,4, (int)o ));
 }
 
 public void SqlOut0(long GlobalId,int OrdinalPosition, object o){
-  
          if (o==null)               {}
     else if (o is Enum)             {ifcSqlInstance.cp.EntityAttributeOfEnum.Add(new ifcSQL.ifcInstance.EntityAttributeOfEnum_Row(GlobalId,OrdinalPosition,ifcSqlType.SqlTypeId(o.GetType()),((int)o))); } 
     else if (o is SELECT)           {SqlOut0(GlobalId,OrdinalPosition,(ifcSqlType)((SELECT)o).SelectValue());}
@@ -78,6 +78,11 @@ public void SqlOut0(long GlobalId,int OrdinalPosition, object o){
                                          case (int)ifc.SqlTable.EntityAttributeOfFloat  : ifcSqlInstance.cp.EntityAttributeOfFloat  .Add(new ifcSQL.ifcInstance.EntityAttributeOfFloat_Row  (GlobalId,OrdinalPosition,tb.SqlTypeId(),(double)((TYPE<double>)o).TypeValue)); break;
                                          case (int)ifc.SqlTable.EntityAttributeOfInteger: ifcSqlInstance.cp.EntityAttributeOfInteger.Add(new ifcSQL.ifcInstance.EntityAttributeOfInteger_Row(GlobalId,OrdinalPosition,tb.SqlTypeId(),(int)((TYPE<int>)o).TypeValue )); break;
                                          case (int)ifc.SqlTable.EntityAttributeOfString : ifcSqlInstance.cp.EntityAttributeOfString .Add(new ifcSQL.ifcInstance.EntityAttributeOfString_Row (GlobalId,OrdinalPosition,tb.SqlTypeId(),(string)((TYPE<string>)o).TypeValue)) /*  o.ToString() )) */; break;
+// bb 17.07.2025 evaluate type of list to sql:
+                                         case (int)ifc.SqlTable.EntityAttributeOfList   : ifcSqlInstance.cp.EntityAttributeOfList   .Add(new ifcSQL.ifcInstance.EntityAttributeOfList_Row   (GlobalId,OrdinalPosition,tb.SqlTypeId() )); 
+                                                                                          IEnumerable list=(IEnumerable)o.GetType().BaseType.GetMethod("GetTypeValue").Invoke(tb, null);
+                                                                                          int ListDim1Position=0;foreach (object item in list) SqlOut1(GlobalId,OrdinalPosition,ListDim1Position++,item);
+                                                                                          break;
                                         }
                                 } 
                             }
@@ -102,12 +107,12 @@ else  if (this.EndOfLineComment!=null)  ifcSqlInstance.cp.EntityAttributeOfStrin
                                   if (((CartesianPoint)this).Coordinates.Count>1) {X=(double)((CartesianPoint)this).Coordinates[0];Y=(double)((CartesianPoint)this).Coordinates[1];}
                                   if (((CartesianPoint)this).Coordinates.Count>2) {Z=(double)((CartesianPoint)this).Coordinates[2];}
                                   ifcSqlInstance.cp.EntityAttributeOfVector.Add(new ifcSQL.ifcInstance.EntityAttributeOfVector_Row(this.ifcSqlGlobalId,1,25,X,Y,Z));  
-                                 }
+                                 } 
 else if (this is Direction)      {double X=0;double Y=0;double? Z=null; 
                                   if (((Direction)this).DirectionRatios.Count>1) {X=(double)((Direction)this).DirectionRatios[0];Y=(double)((Direction)this).DirectionRatios[1];}
                                   if (((Direction)this).DirectionRatios.Count>2) {Z=(double)((Direction)this).DirectionRatios[2];}
                                   ifcSqlInstance.cp.EntityAttributeOfVector.Add(new ifcSQL.ifcInstance.EntityAttributeOfVector_Row(this.ifcSqlGlobalId,1,42,X,Y,Z));  
-                                 }
+                                 } 
 else                             {AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
                                   foreach (AttribInfo attrib in AttribList) SqlOut0(this.ifcSqlGlobalId,attrib.OrdinalPosition,attrib.field.GetValue(this));
                                 }
