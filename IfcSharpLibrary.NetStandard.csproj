@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>ifc</RootNamespace>
+    <AssemblyName>IfcSharpLibrary</AssemblyName>
+    <LangVersion>7.3</LangVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IfcSchema\ifc_IFC4_generated_entity.cs" />
+    <Compile Include="IfcSchema\ifc_IFC4_generated_enum.cs" />
+    <Compile Include="IfcSchema\ifc_IFC4_generated_select.cs" />
+    <Compile Include="IfcSchema\ifc_IFC4_generated_type.cs" />
+    <Compile Include="IfcSharpCore\ifc_base.cs" />
+    <Compile Include="IfcSharpCore\ifc_base_sql.cs" />
+    <Compile Include="IfcSharpCore\ifc_header.cs" />
+    <Compile Include="IfcSharpCore\ifc_model.cs" />
+    <Compile Include="IfcSharpCore\ifc_schema.cs" />
+    <Compile Include="IfcSharpCore\ifc_encoding.cs" />
+    <Compile Include="IfcSharpCore\ifc_sort.cs" />
+    <Compile Include="IfcSharpCore\ifc_base_list.cs" />
+    <Compile Include="IfcSharpCore\ifc_base_type.cs" />
+    <Compile Include="IfcSharpCore\ifc_base_entity.cs" />
+    <Compile Include="IfcSharpCore\ifc_base_select.cs" />
+    <Compile Include="IfcSharpCore\Ifc_guid.cs" />
+    <Compile Include="IfcSharpCore\ifc_base_units.cs" />
+    <Compile Include="IfcSharpCore\ifc_base_geometry.cs" />
+    <Compile Include="IfcSharpCore\ifc_logging.cs" />
+    <Compile Include="IfcIO\IfcSql\ifcSQL_for_ifcSQL_Instance.cs" />
+    <Compile Include="IfcIO\IfcSql\ifcSQL_db_interface.cs" />
+    <Compile Include="IfcIO\IfcSql\ifc_out_sql.cs" />
+    <Compile Include="IfcIO\IfcSql\ifc_in_sql.cs" />
+    <Compile Include="IfcIO\IfcStep\ifc_in_step.cs" />
+    <Compile Include="IfcIO\IfcStep\ifc_out_step.cs" />
+    <Compile Include="IfcIO\ifc_out_html.cs" />
+    <Compile Include="IfcIO\ifc_out_cs.cs" />
+    <Compile Include="IfcIO\IfcXml\ifc_out_Xml.cs" />
+    <Compile Include="IfcIO\IfcXml\ifc_in_xml.cs" />
+  </ItemGroup>
+</Project>
